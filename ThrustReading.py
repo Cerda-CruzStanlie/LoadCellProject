@@ -21,10 +21,10 @@ def has_internet(host="8.8.8.8", port=53, timeout=1): # Check internet connectiv
         return False
 
 # CSV file
-filename = 'thrusts.csv'
+filename = 'Prop_10VThrusts.csv'
 
 #  PWM label
-PWM = 1300
+PWM = int(input('PWM level:\t'))
 columb_label = f"{PWM}"  # Create column label based off PWM value
 
 spinup = True
@@ -64,16 +64,18 @@ try:
     while has_internet():
         line = ser1.readline()
         if line:
-            if spinup == True:
                 # Wait for ESC to spin up
-                print("Waiting 3 seconds for ESC to spin up...")
+                print("Waiting for ESC to spin up...")
                 # Send PWM value to ESC to prevent stall
                 tare = line
                 tare = value_to_grams(tare.decode(errors='ignore').strip())
-                ser1.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
-                time.sleep(3)
+                for t in range(5):
+                    PWM_wind = int(round(float(PWM-1000)*(t+1)/5))+1000
+                    print(f'PWM = {PWM_wind}')
+                    ser1.write(PWM_wind.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
+                    time.sleep(3)
+                time.sleep(1)
                 ser2 = serial.Serial(port='/dev/ttyS0', baudrate=115200, timeout=1)
-                spinup = False
                 break
     while has_internet():
         line = ser2.readline()
@@ -87,8 +89,8 @@ try:
         # Send PWM value to ESC to prevent stall
         ser2.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
         
-        #if k >= 100: # Collect 100 readings then stop
-        #    break
+        if k >= 100: # Collect 100 readings then stop
+            break
 
             
 
