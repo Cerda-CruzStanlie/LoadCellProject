@@ -21,13 +21,11 @@ def has_internet(host="8.8.8.8", port=53, timeout=1): # Check internet connectiv
         return False
 
 # CSV file
-filename = 'Prop_10VThrusts.csv'
+filename = 'Prop_16VThrusts.csv'
 
 #  PWM label
 PWM = int(input('PWM level:\t'))
 columb_label = f"{PWM}"  # Create column label based off PWM value
-
-spinup = True
 
 k = 0
 try:
@@ -60,9 +58,9 @@ try:
         df.loc[:, columb_label] = np.nan
         
     # Configure serial
-    ser1 = serial.Serial(port='/dev/ttyS0', baudrate=115200, timeout=1)
+    ser2 = serial.Serial(port='/dev/ttyS0', baudrate=115200, timeout=1)
     while has_internet():
-        line = ser1.readline()
+        line = ser2.readline()
         if line:
                 # Wait for ESC to spin up
                 print("Waiting for ESC to spin up...")
@@ -72,9 +70,10 @@ try:
                 for t in range(5):
                     PWM_wind = int(round(float(PWM-1000)*(t+1)/5))+1000
                     print(f'PWM = {PWM_wind}')
-                    ser1.write(PWM_wind.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
+                    ser2.write(PWM_wind.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
                     time.sleep(3)
                 time.sleep(1)
+                ser2.close()
                 ser2 = serial.Serial(port='/dev/ttyS0', baudrate=115200, timeout=1)
                 break
     while has_internet():
@@ -88,11 +87,9 @@ try:
 
         # Send PWM value to ESC to prevent stall
         ser2.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
-        
+
         if k >= 100: # Collect 100 readings then stop
             break
-
-            
 
 finally:
     df.to_csv(filename, index=False)
@@ -101,6 +98,5 @@ finally:
         ser2.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC (Failsafe 2)
     except NameError:
         pass
-    ser1.close()    
     ser2.close()
 
