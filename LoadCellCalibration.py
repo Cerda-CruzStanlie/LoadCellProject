@@ -16,7 +16,8 @@ filename = 'readings.csv'
 weight_in_grams = 0
 weight_label = f"{weight_in_grams:.2f}"  # Convert to grams and format as a string
 col = str(weight_label)
-k = 0
+
+values = []
 
 try:
     # Load existing CSV or create a new one
@@ -38,14 +39,13 @@ try:
     while True:
         line = ser.readline()
         if line:
-            value = line.decode(errors='ignore').strip()
-            print(value)
+            val = float(line.decode(errors='ignore').strip())
+            print(val)
+            values.append(val)
 
-            # Write/overwrite latest value in this weight's column on the single row
-            df.loc[k, col] = value
-            k = k + 1
-            # Save back to CSV
+            
 
 finally:
-    df.to_csv(filename, index=False)
+    df.loc[:, col] = {col:values}
+    df.to_csv(filename, index=False) # Save back to CSV
     ser.close()
