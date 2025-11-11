@@ -9,7 +9,7 @@ arm = 45.5
 
 # Functions
 def value_to_grams(value): # Convert raw sensor value to grams
-    return 5.5/arm*0.00464334*float(value)
+    return 5.5/arm*0.00522*float(value)
 
 def has_internet(host="8.8.8.8", port=53, timeout=1): # Check internet connectivity
     """Return True if we can reach the internet (DNS server), else False."""
