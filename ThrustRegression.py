@@ -3,14 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load data: CSV where the first row = column headers = PWM values (microseconds)
-
-csv_path = "Prop_10VThrusts.csv"   # <- change this to your CSV if needed
+Voltage = 10  # voltage setting during data collection
+csv_path = f"Prop_{Voltage}VThrusts.csv"   # <- change this to your CSV if needed
 df = pd.read_csv(csv_path)
 
 # Column names are strings; convert them to floats to get numeric PWM
 PWM = df.columns.astype(float)   # e.g., ['50','100'] -> array([50., 100.])
 
-readings_df = df.apply(pd.to_numeric)
+readings_df = df.apply(pd.to_numeric) * (15.5 / 6)
 
 means  = readings_df.mean(axis=0).to_numpy()               
 stds   = readings_df.std(axis=0, ddof=1).to_numpy()        
@@ -72,7 +72,7 @@ y_line = m * x_line + b                              # corresponding fitted gram
 plt.figure(figsize=(7, 5))
 
 # Scatter of all individual gram thrust values
-plt.scatter(x_all, y_all, s=12, alpha=0.4, label="All gram thrust values", color="gray")
+plt.scatter(x_all, y_all, s=12, alpha=0.4, label="Individual readings", color="gray")
 
 # Error bars showing mean ± std at each PWM level
 plt.errorbar(
@@ -81,11 +81,10 @@ plt.errorbar(
     yerr=stds, 
     fmt='o', 
     markersize=8, 
-    color='blue', 
+    alpha=.9,
     capsize=5, 
-    capthick=2,
-    label=f"Mean ± Std Dev (n={counts.astype(int)})",
-    zorder=3
+    capthick=1.5,
+    label="Mean ± 1 std"
 )
 
 # Best-fit line for gram thrust = m * PWM + b (linear regression)
@@ -94,17 +93,22 @@ plt.plot(
     y_line,
     linewidth=2,
     color='red',
-    label=f"gram thrust = {m:.3g}·PWM + {b:.3g}\n$R^2$ = {r2_rb:.4f}",
+    label=f"Thrust = {m:.3g}·PWM + {b:.3g}",
 )
 
-plt.xlabel("Throttle (PWM) us")
-plt.ylabel("Gram Thrust (g)")
-plt.title("Thrust Calibration: Gram Thrust vs. PWM")
+plt.xlabel("Throttle [PWM] (us)")
+plt.ylabel("Thrust (gram-force)")
+plt.title(f"Thrust Pulse Width Mapping ({Voltage}V)")
 
 # Light grid to help visually line up points with the axes
-plt.grid(True, which="both", linestyle="--", alpha=0.5)
-plt.legend(loc="best")
+plt.grid(True, which="both", linestyle="--", alpha=1)
+plt.legend(loc="lower right")
 plt.tight_layout()
 
-# Save to file (nice for SSH/headless Pi); you can open this later
+
+
+# also add R^2 as text on the plot (top-left), then save a second copy
+plt.gca().text(0.03, 0.97, f"$R^2$ = {r2_rb:.4f}", transform=plt.gca().transAxes,
+               fontsize=10, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.6))
 plt.savefig("ThrustPlot.png", dpi=300)
+plt.close()
