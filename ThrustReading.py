@@ -28,6 +28,8 @@ PWM = int(input('PWM level:\t'))
 columb_label = f"{PWM}"  # Create column label based off PWM value
 
 k = 0
+values = []
+n = 100 #length
 try:
     # Load existing CSV or create a new one
     if os.path.exists(filename): # Check if the file exists
@@ -79,12 +81,11 @@ try:
     while has_internet():
         line = ser2.readline()
         if line:
-            value = line.decode(errors='ignore').strip()
-            grams = (value_to_grams(value)- tare)
-            print(f'grams:{grams}\tobtained:{value_to_grams(value)}\ttare:{tare}')
-            df.loc[k, columb_label] = grams # Write to structured DataFrame
-            k = k + 1 # Increment row counter
-
+            val = line.decode(errors='ignore').strip()
+            grams = (value_to_grams(val)- tare)
+            print(f'grams:{grams}\tobtained:{value_to_grams(val)}\ttare:{tare}')
+            values.append(val)
+            k += 1
         # Send PWM value to ESC to prevent stall
         ser2.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
 
@@ -92,6 +93,7 @@ try:
             break
 
 finally:
+    df[columb_label] = pd.Series(values)
     df.to_csv(filename, index=False)
     try:
         PWM = 1000  # Failsafe PWM
