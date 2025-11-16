@@ -9,7 +9,7 @@ arm = 45.5
 
 # Functions
 def value_to_grams(value): # Convert raw sensor value to grams
-    return 5.5/arm*0.00522*float(value)
+    return 15.5/arm*(0.00522*float(value)+1.65*1000)
 
 def has_internet(host="8.8.8.8", port=53, timeout=1): # Check internet connectivity
     """Return True if we can reach the internet (DNS server), else False."""
@@ -21,7 +21,7 @@ def has_internet(host="8.8.8.8", port=53, timeout=1): # Check internet connectiv
         return False
 
 # CSV file
-filename = 'Prop_16VThrusts.csv'
+filename = 'Fan_NoDuct_16VThrusts.csv'
 
 #  PWM label
 PWM = int(input('PWM level:\t'))
