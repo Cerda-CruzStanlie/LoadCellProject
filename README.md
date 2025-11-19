@@ -1,20 +1,19 @@
 # Load Cell Thrust Measurement Thrust Stand
 Raspberry Pi–based load cell rig for thrust measurement and calibration.
 
-Project Overview
+## Project Overview
 - Measures thrust using a load cell and **HX711 amplifier**.
 - Runs data acquisition on a ESP32 and sends it via serial link to Raspberry Pi.
 - Logs readings to CSV and provides Python tools for calibration and plotting.
 - Designed for undergraduate research and lab use (e.g., EDF / propeller testing).
-You can use this repository to:
+## You can use this repository to:
 - Calibrate a new load cell.
 - Run thrust tests at different PWM / throttle commands.
 - Generate plots for reports and papers.
   
-Demo / Screenshots
-
+## Demo / Screenshots
 Photo of the rig.
-  ![Load cell test stand](Images/ThrustStand.jpg)
+  <img src= "Images/ThrustStand.jpg" alt="Load cell rig" width="50%" >
   Screenshot of terminal or plot of thrust vs time.
 
 Hardware
