@@ -59,8 +59,8 @@ TODO: Clear step-by-step procedure.
 
 ## Known Limitations / TODO / Roadmap
 ### Limitations:
-Power supply limit: Limited Amperage Prevents Full Throttle Mapping
-Data Noise: Raspberry Pi and ESP32 are connected via dupont pins and breadboard, transfering the setup to a PCB could limit noise in the data.
+- Power supply limit: Limited Amperage Prevents Full Throttle Mapping
+- Data Noise: Raspberry Pi and ESP32 are connected via dupont pins and breadboard, transfering the setup to a PCB could limit noise in the data.
 ### TODO:
 - Complete README Procedures
 - Transfer Arduino Code.
