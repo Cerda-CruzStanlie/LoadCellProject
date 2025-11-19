@@ -16,9 +16,10 @@ Photo of the rig.
 
 <img src= "Images/ThrustStand.jpg" alt="Load cell rig" width="50%" >
 
-Typical LoadCell Calibration Plot.
+Typical LoadCell Calibration and Thrust Plots.
 
-<img src= "CalibrationAndTests/Calibration.png" alt="Load cell rig" width="50%" >
+<img src= "CalibrationAndTests/Calibration.png" alt="Calibration" width="50%" >
+<img src= "Main/ThrustPlot.png" alt="Thrust" width="50%" >
   
 ## Hardware
 Load cell specs
