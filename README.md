@@ -38,11 +38,11 @@ Arduino Libraries:
    
 ### Repo Structure
 - Main/ – Thrust acquisition and plotting scripts + current work.
-calibration/ – calibration scripts/notebooks
 - CalibrationAndTests/ – Calibration data acquisition and plotting scripts curent load cell calibration.
+- Images/ - Image Repository
     
 ## Getting Started
-Prerequisites (Python & Arduino).
+Prerequisites - (Python & Arduino)
 
 Installation - (clone repo)
 
