@@ -1,4 +1,4 @@
-# Load Cell Thrust Measurement Thrust Stand
+# Thrust Stand
 Raspberry Pi–based load cell system for thrust measurement and/or load cell calibration. Created in completion of FDM-EDF, An ERAU Office Undergraduate Research Ignite Project. 
 
 ## Project Overview
