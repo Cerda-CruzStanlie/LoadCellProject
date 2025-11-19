@@ -13,6 +13,7 @@ Raspberry Pi–based load cell rig for thrust measurement and calibration.
   
 ## Demo / Screenshots
 Photo of the rig.
+
   <img src= "Images/ThrustStand.jpg" alt="Load cell rig" width="50%" >
   Screenshot of terminal or plot of thrust vs time.
 
