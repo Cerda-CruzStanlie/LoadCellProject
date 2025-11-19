@@ -14,9 +14,12 @@ Raspberry Pi–based load cell system for thrust measurement and/or load cell ca
 ## Demo / Screenshots
 Photo of the rig.
 
-  <img src= "Images/ThrustStand.jpg" alt="Load cell rig" width="50%" >
-  Screenshot of terminal or plot of thrust vs time.
+<img src= "Images/ThrustStand.jpg" alt="Load cell rig" width="50%" >
 
+Typical LoadCell Calibration Plot.
+
+<img src= "Images/ThrustStand.jpg" alt="Load cell rig" width="50%" >
+  
 ## Hardware
 Load cell specs
 - Sparkfun HX711 board
