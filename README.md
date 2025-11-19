@@ -1,9 +1,9 @@
 # Load Cell Thrust Measurement Thrust Stand
-Raspberry Pi–based load cell system for thrust measurement and/or load cell calibration. Created in completion of FDM-EDF, An ERAU Office Undergraduate Research Ignite Projet. 
+Raspberry Pi–based load cell system for thrust measurement and/or load cell calibration. Created in completion of FDM-EDF, An ERAU Office Undergraduate Research Ignite Project. 
 
 ## Project Overview
 - Measures thrust using a load cell and **HX711 amplifier**.
-- Runs data acquisition on a ESP32 and sends it via serial link to Raspberry Pi.
+- Runs data acquisition on an ESP32 and sends it via serial link to Raspberry Pi.
 - Logs readings to CSV and provides Python tools for calibration and plotting.
 - Designed for undergraduate research and lab use (e.g., EDF / propeller testing).
 ## You can use this repository to:
@@ -18,7 +18,7 @@ Photo of the rig.
 
 Typical LoadCell Calibration Plot.
 
-<img src= "Images/ThrustStand.jpg" alt="Load cell rig" width="50%" >
+<img src= "CalibrationandTests/ThrustStand.jpg" alt="Load cell rig" width="50%" >
   
 ## Hardware
 Load cell specs
@@ -39,7 +39,7 @@ Arduino Libraries:
 ### Repo Structure
 - Main/ – Thrust acquisition and plotting scripts + current work.
 calibration/ – calibration scripts/notebooks
-- CalibrationAndTests/ – diagrams, poster, etc.
+- CalibrationAndTests/ – Calibration data acquisition and plotting scripts curent load cell calibration.
     
 ## Getting Started
 Prerequisites (OS, Python version, Arduino core, etc.).
@@ -61,12 +61,13 @@ TODO: Clear step-by-step procedure.
 Power supply limit: Limited Amperage Prevents Full Throttle Mapping
 Data Noise: Raspberry Pi and ESP32 are connected via dupont pins and breadboard, transfering the setup to a PCB could limit noise in the data.
 ### TODO:
-Complete READ Procedures
-### RoadMap:
+- Complete README Procedures
+- Transfer Arduino Code.
+### Roadmap:
 Convert system to battery power with power distribution board for accurate inflight power motor draw. Ideally implemented with a current transducer.
 
 ## Future work/Ideas: 
-For automated efficiency two additional sensor can be implemented with the data collection script.
+For automated efficiency, two sensors can be implemented with the data collection script.
 - Current Draw Sensor (Current Transducer) can be implemented into the loadcell system. Note - The Abestop Power Supply Unit comes with a Transducer, therefore power measurements can be done through that. If the system is to be automated or changed to battery power, having a transducer can allow for automated current data collection.
 - Anemometer Board: An air speed measurement PCB board that can relay airspeed data to the microcontroller would enhance data comprenhesion, as a map of throttle vs efficiency can be generated without needing to do multiple trials. 
 
