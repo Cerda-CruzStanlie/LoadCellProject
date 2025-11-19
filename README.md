@@ -27,11 +27,15 @@ Load cell specs
 - MAD Motor 2815 900KV
 
 ## Software & Repo Structure
-  Short description of languages + main tools (Python, Arduino, etc.).
-  Brief “what lives where”:
-    src/ – data acquisition scripts
-    calibration/ – calibration scripts/notebooks
-    docs/ – diagrams, poster, etc.
+### Languages + main tools: Python and Arduino:
+Arduino Libraries: 
+- ESP-32-S3 Dev Board
+- Hx711 Load Cell Amp
+   
+### Repo Structure
+- Main/ – Thrust acquisition and plotting scripts + current work.
+calibration/ – calibration scripts/notebooks
+- CalibrationAndTests/ – diagrams, poster, etc.
     
 ## Getting Started
   Prerequisites (OS, Python version, Arduino core, etc.).
