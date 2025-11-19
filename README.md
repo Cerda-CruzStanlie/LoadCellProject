@@ -46,7 +46,7 @@ Prerequisites (Python & Arduino).
 
 Installation - (clone repo)
 
-Wire: TODO
+Wiring: TODO
 
 Calibration: TODO
 
@@ -66,11 +66,12 @@ TODO: Clear step-by-step procedure.
 ### Limitations:
 - Power supply limit: Limited Amperage Prevents Full Throttle Mapping
 - Data Noise: Raspberry Pi and ESP32 are connected via dupont pins and breadboard, transfering the setup to a PCB could limit noise in the data.
+
 ### TODO:
 - Complete README Procedures
 - Transfer Arduino Code
 - Complete Wiring Directions
-- 
+  
 ### Roadmap:
 Convert system to battery power with power distribution board for accurate inflight power motor draw. Ideally implemented with a current transducer.
 
