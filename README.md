@@ -27,7 +27,8 @@ Load cell specs
 - MAD Motor 2815 900KV
 
 ## Software & Repo Structure
-### Languages + main tools: Python and Arduino:
+### Languages + main tools: 
+- Python and Arduino
 Arduino Libraries: 
 - ESP-32-S3 Dev Board
 - Hx711 Load Cell Amp
@@ -56,7 +57,8 @@ TODO: Clear step-by-step procedure.
 ### Limitations:
 Power supply limit: Limited Amperage Prevents Full Throttle Mapping
 Data Noise: Raspberry Pi and ESP32 are connected via dupont pins and breadboard, transfering the setup to a PCB could limit noise in the data.
-### TODO: Complete READ Procedures
+### TODO:
+Complete READ Procedures
 ### RoadMap:
 Convert system to battery power with power distribution board for accurate inflight power motor draw. Ideally implemented with a current transducer.
 
