@@ -1,5 +1,5 @@
 # Load Cell Thrust Measurement Thrust Stand
-Raspberry Pi–based load cell system for thrust measurement and/or load cell calibration.
+Raspberry Pi–based load cell system for thrust measurement and/or load cell calibration. Created in completion of FDM-EDF, An ERAU Office Undergraduate Research Ignite Projet. 
 
 ## Project Overview
 - Measures thrust using a load cell and **HX711 amplifier**.
@@ -38,33 +38,25 @@ calibration/ – calibration scripts/notebooks
 - CalibrationAndTests/ – diagrams, poster, etc.
     
 ## Getting Started
-  Prerequisites (OS, Python version, Arduino core, etc.).
-  Installation (clone repo, install requirements).
-  Configuration (edit a config file, serial port, calibration constant).
+Prerequisites (OS, Python version, Arduino core, etc.).
+Installation (clone repo, install requirements).
+Configuration (edit a config file, serial port, calibration constant).
 
 ## Usage
-  How to:
-    Run the main script.
-      To Calibrate the load cell system
-    Start a calibration run.
-    Log data to CSV.
-  Examples and expected outputs.
-  
+
 ### Calibration
-  Clear step-by-step procedure.
-  Link to calibration script/notebook.
-  Mention where the calibration factor is stored.
+In CalibrationAndTests/ follow the instructions for data collection and regression of the chosen load cell.
+TODO: Clear step-by-step procedure.
 
 ### Main
-  Where CSVs get saved.
-  Column meanings.
-  Link to plotting/analysis scripts.
+In CalibrationAndTests/ follow the instructions for data collection and regression of the chosen load cell.
+TODO: Clear step-by-step procedure.
 
 ## Known Limitations / TODO / Roadmap
 ### Limitations:
 Power supply limit: Limited Amperage Prevents Full Throttle Mapping
 Data Noise: Raspberry Pi and ESP32 are connected via dupont pins and breadboard, transfering the setup to a PCB could limit noise in the data.
-### TODO: -
+### TODO: Complete READ Procedures
 ### RoadMap:
 Convert system to battery power with power distribution board for accurate inflight power motor draw. Ideally implemented with a current transducer.
 
@@ -74,4 +66,4 @@ For automated efficiency two additional sensor can be implemented with the data 
 - Anemometer Board: An air speed measurement PCB board that can relay airspeed data to the microcontroller would enhance data comprenhesion, as a map of throttle vs efficiency can be generated without needing to do multiple trials. 
 
 ## How to Give Feedback / Contribute
-  Feedback form: Check Creator's Page
+Feedback form: Check Creator's Page
