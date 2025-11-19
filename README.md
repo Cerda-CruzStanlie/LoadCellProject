@@ -18,8 +18,7 @@ Photo of the rig.
 
 Typical LoadCell Calibration and Thrust Plots.
 
-<img src= "CalibrationAndTests/Calibration.png" alt="Calibration" width="50%" >
-<img src= "Main/ThrustPlot.png" alt="Thrust" width="50%" >
+<img src= "CalibrationAndTests/Calibration.png" alt="Calibration" width="50%" > <img src= "Main/ThrustPlot.png" alt="Thrust" width="50%" >
   
 ## Hardware
 Load cell specs
@@ -43,9 +42,15 @@ calibration/ – calibration scripts/notebooks
 - CalibrationAndTests/ – Calibration data acquisition and plotting scripts curent load cell calibration.
     
 ## Getting Started
-Prerequisites (OS, Python version, Arduino core, etc.).
-Installation (clone repo, install requirements).
-Configuration (edit a config file, serial port, calibration constant).
+Prerequisites (Python & Arduino).
+
+Installation - (clone repo)
+
+Wire: TODO
+
+Calibration: TODO
+
+Thrust: TODO
 
 ## Usage
 
@@ -63,7 +68,9 @@ TODO: Clear step-by-step procedure.
 - Data Noise: Raspberry Pi and ESP32 are connected via dupont pins and breadboard, transfering the setup to a PCB could limit noise in the data.
 ### TODO:
 - Complete README Procedures
-- Transfer Arduino Code.
+- Transfer Arduino Code
+- Complete Wiring Directions
+- 
 ### Roadmap:
 Convert system to battery power with power distribution board for accurate inflight power motor draw. Ideally implemented with a current transducer.
 
