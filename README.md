@@ -11,17 +11,18 @@ You can use this repository to:
 - Run thrust tests at different PWM / throttle commands.
 - Generate plots for reports and papers.
   
-Demo / Screenshots (optional but nice)
+Demo / Screenshots
 
 Photo of the rig.
+  ![Load cell test stand](Images/ThrustStand.jpg)
   Screenshot of terminal or plot of thrust vs time.
 
 Hardware
   Bullet list of components with links:
     Load cell specs
-    HX711 board
-    ESP32 / Pi model
-    PSU, ESC, motor, etc.
+      HX711 board
+      ESP32 / Pi model
+      PSU, ESC, motor, etc.
   Mention wiring at a high level and link to a wiring diagram in /docs or /images.
 
 Software & Repo Structure
