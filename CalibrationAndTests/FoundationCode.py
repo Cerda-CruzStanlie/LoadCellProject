@@ -19,7 +19,7 @@ def has_internet(host="8.8.8.8", port=53, timeout=1): # Check internet connectiv
         return False
 
 # CSV file
-filename = 'thrusts.csv'
+filename = 'CalibrationAndTests\\thrusts.csv'
 
 #  PWM label
 PWM = 1300
