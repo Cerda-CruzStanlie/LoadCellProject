@@ -82,7 +82,7 @@ try:
         line = ser2.readline()
         if line:
             val = line.decode(errors='ignore').strip()
-            grams = (value_to_grams(val))- tare
+            grams = (value_to_grams(val)- tare)
             print(f'grams:{grams}\tobtained:{value_to_grams(val)}\ttare:{tare}')
             values.append(grams)
             k += 1

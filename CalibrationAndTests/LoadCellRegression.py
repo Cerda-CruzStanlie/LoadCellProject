@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # === Load CSV (assumes first row are column headers = weights in grams) ===
-path = "CalibrationReadings.csv"   
+path = "CalibrationAndTests\\CalibrationReadings.csv"   
 df = pd.read_csv(path)
 
 # Convert header strings to float weights
@@ -52,4 +52,4 @@ plt.tight_layout()
 plt.gca().text(0.03, 0.97, f"$R^2$ = {r2:.4f}", transform=plt.gca().transAxes,
                fontsize=10, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.6))
 # Save plot to file
-plt.savefig("Calibration.png", dpi=300)
+plt.savefig("CalibrationAndTests\\Calibration.png", dpi=300)

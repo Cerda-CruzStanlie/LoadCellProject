@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 
 # Load data: CSV where the first row = column headers = PWM values (microseconds)
 Voltage = 10  # voltage setting during data collection
-csv_path = f"Prop_{Voltage}VThrusts.csv"   # <- change this to your CSV if needed
+csv_path = f"Main\\Prop_{Voltage}VThrusts.csv"   # <- change this to your CSV if needed
 df = pd.read_csv(csv_path)
 
 # Column names are strings; convert them to floats to get numeric PWM
 PWM = df.columns.astype(float)   # e.g., ['50','100'] -> array([50., 100.])
 
-readings_df = df.apply(pd.to_numeric) * (15.5 / 6)
+readings_df = df.apply(pd.to_numeric) # * (15.5 / 6) # Arm Correction Error Compensation for 10V data
 
 means  = readings_df.mean(axis=0).to_numpy()               
 stds   = readings_df.std(axis=0, ddof=1).to_numpy()        
@@ -110,5 +110,5 @@ plt.tight_layout()
 # also add R^2 as text on the plot (top-left), then save a second copy
 plt.gca().text(0.03, 0.97, f"$R^2$ = {r2_rb:.4f}", transform=plt.gca().transAxes,
                fontsize=10, verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.6))
-plt.savefig("ThrustPlot.png", dpi=300)
+plt.savefig("Main\\ThrustPlot.png", dpi=300)
 plt.close()
