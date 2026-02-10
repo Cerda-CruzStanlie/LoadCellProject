@@ -21,7 +21,7 @@ def has_internet(host="8.8.8.8", port=53, timeout=1): # Check internet connectiv
         return False
 
 # CSV file
-filename = 'Fan_NoDuct_16VThrusts.csv'
+filename = 'Test.csv'
 
 #  PWM label
 PWM = int(input('PWM level:\t'))
@@ -84,7 +84,7 @@ try:
             val = line.decode(errors='ignore').strip()
             grams = (value_to_grams(val))- tare
             print(f'grams:{grams}\tobtained:{value_to_grams(val)}\ttare:{tare}')
-            values.append(val)
+            values.append(grams)
             k += 1
         # Send PWM value to ESC to prevent stall
         ser2.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
