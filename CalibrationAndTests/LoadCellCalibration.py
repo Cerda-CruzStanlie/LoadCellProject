@@ -7,7 +7,7 @@ def pounds_to_grams(pounds):
     return pounds * 453.592
 
 # CSV file
-filename = 'CalibrationReadings.csv'
+filename = 'CalibrationAndTests\\CalibrationReadings.csv'
 
 # Convert a number to a string and use it as the weight_label
 
