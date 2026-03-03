@@ -22,12 +22,13 @@ def has_internet(host="8.8.8.8", port=53, timeout=1): # Check internet connectiv
         return False
 
 # CSV file
-filename = 'Test.csv'
+filename = 'Test'
 
 #  PWM label
 PWM = int(input('PWM level:\t'))
 columb_label = f"Mass_{PWM}"  # Create column label for mass based off PWM value
 current_label = f"Current_{PWM}"  # Create column label for current for this run
+wind_label = f"WindSpeed_{PWM}"  # Wind speed recorded at end of this run
 
 k = 0
 Current = []
@@ -111,12 +112,31 @@ finally:
     df[columb_label] = pd.Series(MForce)
     df[current_label] = pd.Series(Current)
 
+    # Ask user for end-of-experiment wind speed and store it for this run
+    wind_speed = np.nan
+    if len(MForce) > 0:
+        while True:
+            wind_input = input("Enter anemometer wind speed at end of run (m/s):\t").strip()
+            try:
+                wind_speed = float(wind_input)
+                break
+            except ValueError:
+                print("Invalid number. Please enter wind speed as a numeric value (example: 3.25).")
+
+    if wind_label not in df.columns:
+        df[wind_label] = pd.Series(dtype='float')
+    else:
+        df.loc[:, wind_label] = np.nan
+
+    if not np.isnan(wind_speed):
+        df[wind_label] = pd.Series([wind_speed] * len(MForce))
+
     try:
         PWM = 1000  # Failsafe PWM
         ser.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC (Failsafe 2)
     except NameError:
         pass
     ser.close()
-    filneame = filename
+    
     df.to_csv(filename, index=False)
 
