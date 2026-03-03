@@ -4,6 +4,7 @@ import os
 import time
 import socket
 import numpy as np
+import argparse
 
 arm = 45.5
 
@@ -63,36 +64,44 @@ try:
             df.loc[:, label] = np.nan
         
     # Configure serial
-    ser2 = serial.Serial(port='/dev/ttyS0', baudrate=115200, timeout=1)
+    ser = serial.Serial(port='/dev/ttyS0', baudrate=115200, timeout=1)
+    # spin‑up: grab initial reading and wind the ESC slowly so the motor doesn’t stall
     while has_internet():
-        line = ser2.readline()
+        line = ser.readline()
         if line:
-                # Wait for ESC to spin up
-                print("Waiting for ESC to spin up...")
-                # Send PWM value to ESC to prevent stall
-                tare = line
-                tare = value_to_grams(tare.decode(errors='ignore').strip())
-                for t in range(5):
-                    PWM_wind = int(round(float(PWM-1000)*(t+1)/5))+1000
-                    print(f'PWM = {PWM_wind}')
-                    ser2.write(PWM_wind.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
-                    time.sleep(3)
-                time.sleep(1)
-                ser2.close()
-                ser2 = serial.Serial(port='/dev/ttyS0', baudrate=115200, timeout=1)
-                break
+            print("Waiting for ESC to spin up...")
+            tare = value_to_grams(line.decode(errors='ignore').strip())
+            for t in range(5):
+                PWM_wind = int(round(float(PWM-1000)*(t+1)/5))+1000
+                print(f'PWM = {PWM_wind}')
+                ser.write(PWM_wind.to_bytes(2, "big", signed=False))
+                time.sleep(3)
+            time.sleep(1)
+            # reopen to flush any junk left in the buffer
+            ser.close()
+            ser = serial.Serial(port='/dev/ttyS0', baudrate=115200, timeout=1)
+            break
+
+    # main acquisition loop — read two lines per iteration
     while has_internet():
-        line = ser2.readline()
-        if line:
-            val1 = line.decode(errors='ignore').strip()
-            val2 = line.decode(errors='ignore').strip()
-            grams = (value_to_grams(val1)- tare)
-            print(f'grams:{grams}\tobtained:{value_to_grams(val1)}\ttare:{tare}')
-            MForce.append(grams)
-            Current.append(val2)
-            k += 1
+        line = ser.readline()
+        if not line:
+            continue
+        val1 = line.decode(errors='ignore').strip()
+
+        line = ser.readline()
+        if not line:
+            continue
+        val2 = line.decode(errors='ignore').strip()
+
+        grams = (value_to_grams(val1) - tare)
+        print(f'grams:{grams}\tobtained:{value_to_grams(val1)}\ttare:{tare}')
+        MForce.append(grams)
+        Current.append(val2)
+        k += 1
+
         # Send PWM value to ESC to prevent stall
-        ser2.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC 
+        ser.write(PWM.to_bytes(2, "big", signed=False))
 
         if k >= 100: # Collect 100 readings then stop
             break
@@ -101,11 +110,13 @@ finally:
     # Write mass and current side-by-side for this run
     df[columb_label] = pd.Series(MForce)
     df[current_label] = pd.Series(Current)
-    df.to_csv(filename, index=False)
+
     try:
         PWM = 1000  # Failsafe PWM
-        ser2.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC (Failsafe 2)
+        ser.write(PWM.to_bytes(2, "big", signed=False)) # Send PWM value to ESC (Failsafe 2)
     except NameError:
         pass
-    ser2.close()
+    ser.close()
+    filneame = filename
+    df.to_csv(filename, index=False)
 
